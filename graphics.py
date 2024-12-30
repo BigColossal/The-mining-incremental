@@ -73,26 +73,32 @@ class Window:
             pos_y = count * 75
             mob_health = round(mob_health ** 1.5)
             mob_level = count ** 2
-            def monster_UI(event):
-                self.clear_screen()
-                self.title_creation(mob, True)
-                self.back_button_creation(self.mob_fighting_screen)
 
-                self.text_creation(100, 175, f"Inferior {mob}", 25)
-                self.text_creation(45, 200, f"Health {mob_health - (mob_health // 4)}", 20)
-                self.button_creation(self.mob_fighting_screen, 130, 200, "Kill", 20, 40, 25)
-
-                self.text_creation(100, 350, f"Superior {mob}", 25)
-                self.text_creation(45, 375, f"Health {mob_health}", 20)
-                self.button_creation(self.mob_fighting_screen, 130, 375, "Kill", 20, 40, 25)
-
-                self.text_creation(100, 525, f"Elite {mob}", 25)
-                self.text_creation(45, 550, f"Health {mob_health + (mob_health // 4)}", 20)
-                self.button_creation(self.mob_fighting_screen, 130, 550, "Kill", 20, 40, 25)
             
             self.text_creation(100, pos_y, mob, 25)
             self.text_creation(45, pos_y + 25, f"Level {mob_level}", 20)
-            self.button_creation(monster_UI, 120, pos_y + 25, "Select", 20, 40, 25)
+            self.button_creation(lambda event, mob=mob, mob_health=mob_health: self.mob_tiers_screen(mob, mob_health), 120, pos_y + 25, "Select", 20, 40, 25)
+
+    def mob_tiers_screen(self, mob, mob_health):
+        print(mob)
+        print(mob_health)
+        self.clear_screen()
+        self.title_creation(mob, True)
+        self.back_button_creation(self.mob_fighting_screen)
+
+        
+
+        self.text_creation(100, 175, f"Inferior {mob}", 25)
+        self.text_creation(65, 200, f"Health {mob_health - (mob_health // 4)}", 20)
+        self.button_creation(self.mob_fighting_screen, 150, 200, "Kill", 20, 40, 25)
+
+        self.text_creation(100, 350, f"Superior {mob}", 25)
+        self.text_creation(65, 375, f"Health {mob_health}", 20)
+        self.button_creation(self.mob_fighting_screen, 150, 375, "Kill", 20, 40, 25)
+
+        self.text_creation(100, 525, f"Elite {mob}", 25)
+        self.text_creation(65, 550, f"Health {mob_health + (mob_health // 4)}", 20)
+        self.button_creation(self.mob_fighting_screen, 150, 550, "Kill", 20, 40, 25)
 
     def mining_screen(self, event):
         self.clear_screen()
